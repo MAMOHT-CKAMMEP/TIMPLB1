@@ -5,8 +5,16 @@
 RouteCipher::RouteCipher(int k) : key(k) {
 }
 
-std::string RouteCipher::encrypt(const std::string& open_text)
+std::string RouteCipher::encrypt(const std::string& text_with_spaces)
 {
+    std::string open_text;
+    for (char c : text_with_spaces) {
+        if (c != ' ') {
+            open_text += c;
+        }
+    }
+
+
     int len = open_text.length();
     int rows = (len + key - 1) / key;
 
@@ -33,8 +41,15 @@ std::string RouteCipher::encrypt(const std::string& open_text)
     return cipher_text;
 }
 
-std::string RouteCipher::decrypt(const std::string& cipher_text)
+std::string RouteCipher::decrypt(const std::string& text)
 {
+    std::string cipher_text;
+    for (char c : text) {
+        if (c != ' ') {
+            cipher_text += c;
+        }
+    }
+
     int len = cipher_text.length();
     int rows = (len + key - 1) / key;
     int total_cells = rows * key;
